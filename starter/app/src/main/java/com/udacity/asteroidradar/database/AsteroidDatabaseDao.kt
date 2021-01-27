@@ -7,7 +7,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 
 @Dao
-interface AsteroidDao {
+interface AsteroidDatabaseDao {
     @Query("SELECT * FROM asteroids_table WHERE close_approach_date = date('now') ORDER BY close_approach_date DESC")
     fun getTodayAsteroids(): LiveData<List<AsteroidEntity>>
 
@@ -17,21 +17,16 @@ interface AsteroidDao {
     @Query("SELECT * FROM asteroids_table WHERE close_approach_date >= date('now') ORDER BY close_approach_date DESC")
     fun getAsteroids(): LiveData<List<AsteroidEntity>>
 
-    @Query("DELETE FROM asteroids_table")
-    fun clear()
+    @Query("SELECT * FROM picture_of_day_table")
+    suspend fun getPictureOfTheDay(): PictureEntity
 
     @Query("DELETE FROM asteroids_table WHERE close_approach_date < date('now')")
     fun deletePastAsteroids(): Int
 
-//    @Insert(onConflict = OnConflictStrategy.REPLACE)
-//    fun insertAll(asteroids: List<AsteroidEntity>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(vararg asteroid: AsteroidEntity)
+    suspend fun insertAll(asteroids: List<AsteroidEntity>)
 
-//    @Query("SELECT * FROM picture_of_day")
-//    suspend fun getPictureOfTheDay(): DatabasePictureOfDay
-
-//    @Insert(onConflict = OnConflictStrategy.REPLACE)
-//    suspend fun insertPictureOfTheDay(vararg pictureOfDay: DatabasePictureOfDay)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertPictureOfTheDay(vararg pictureOfDay: PictureEntity)
 }

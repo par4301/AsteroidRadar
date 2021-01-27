@@ -32,6 +32,7 @@ data class AsteroidEntity constructor(
     val isPotentiallyHazardous: Boolean
 )
 
+// Extension function that converts from database objects to domain objects.
 fun List<AsteroidEntity>.asDomainModel(): List<Asteroid> {
     return map {
         Asteroid(
@@ -40,7 +41,7 @@ fun List<AsteroidEntity>.asDomainModel(): List<Asteroid> {
             closeApproachDate = it.closeApproachDate,
             absoluteMagnitude = it.absoluteMagnitude,
             estimatedDiameter = it.estimatedDiameter,
-            relativeVelocity = it.estimatedDiameter,
+            relativeVelocity = it.relativeVelocity,
             distanceFromEarth = it.distanceFromEarth,
             isPotentiallyHazardous = it.isPotentiallyHazardous
         )

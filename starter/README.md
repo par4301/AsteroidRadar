@@ -6,4 +6,6 @@ This folder should contain the scaffolded project files to get a student started
 Use the updated Gradle version in the `~/gradle/wrapper/gradle-wrapper.properties` file:
 ```
 distributionUrl = https\://services.gradle.org/distributions/gradle-6.1.1-all.zip
+
+## please add apiKey in your local.properties, e.g. apiKey=ASDCHHGDHDHJGD....
 ```
